@@ -1,5 +1,7 @@
 # app
 
+Project for 'Belajar Membuat Aplikasi Flutter untuk Pemula' on Dicoding
+
 A new Flutter project.
 
 ## Getting Started
