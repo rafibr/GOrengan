@@ -1,6 +1,6 @@
 # app
 
-Project for 'Belajar Membuat Aplikasi Flutter untuk Pemula' on Dicoding
+Project for 'Belajar Membuat Aplikasi Flutter untuk Pemula' on Dicoding using PMVVM Architecture
 
 A new Flutter project.
 
