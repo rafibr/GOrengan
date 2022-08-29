@@ -45,234 +45,240 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildMobileLayout(DashboardViewModel vm) {
-    return SingleChildScrollView(
-      child: RefreshIndicator(
-        onRefresh: vm.refresh,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 75,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.sort,
-                      color: colorStyle.secondary,
-                      size: 20,
-                    ),
-                    onPressed: () {
-                      vm.search();
-                    },
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 45),
-                      child: InkWell(
-                        onTap: () {
-                          vm.search();
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Deliver To Icon arrow down
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Antar ke',
-                                  style: TextStyle(
-                                    color: colorStyle.secondary,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: colorStyle.secondary,
-                                  size: 20,
-                                ),
-                              ],
-                            ),
-                            Text(
-                              'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: colorStyle.textLight,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
+    return RefreshIndicator(
+      onRefresh: () async {
+        await vm.refresh();
+      },
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          padding: EdgeInsets.only(top: 25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                height: 75,
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.sort,
+                        color: colorStyle.secondary,
+                        size: 20,
                       ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.person,
-                      color: colorStyle.secondary,
-                      size: 20,
-                    ),
-                    onPressed: () {
-                      vm.about();
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Makan Apa Hari Ini?',
-                    style: TextStyle(
-                      color: colorStyle.secondary,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  // search bar
-                  InkWell(
-                    onTap: () {
-                      vm.search();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: TextField(
-                        enabled: false,
-                        decoration: InputDecoration(
-                          hintText: 'Cari Makanan',
-                          hintStyle: TextStyle(
-                            color: colorStyle.textLight,
-                            fontSize: 14,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
-                              color: colorStyle.secondary,
-                              width: 1,
-                            ),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: colorStyle.secondary,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  // Category scroll view horizontal
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Kategori',
-                          style: TextStyle(
-                            color: colorStyle.secondary,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 100,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: vm.categories.length,
-                      itemBuilder: (context, index) {
-                        return CategoriesCard(
-                          categories: vm.categories[index],
-                          onTap: () {
-                            vm.listDishByCategories(vm.categories[index]);
-                          },
-                        );
+                      onPressed: () {
+                        vm.search();
                       },
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  // list makanan
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Makanan',
-                          style: TextStyle(
-                            color: colorStyle.secondary,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 45),
+                        child: InkWell(
+                          onTap: () {
+                            vm.search();
+                          },
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Deliver To Icon arrow down
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Antar ke',
+                                    style: TextStyle(
+                                      color: colorStyle.secondary,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: colorStyle.secondary,
+                                    size: 20,
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: colorStyle.textLight,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        TextButton(
-                          child: Text(
-                            'Lihat Semua',
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.person,
+                        color: colorStyle.secondary,
+                        size: 20,
+                      ),
+                      onPressed: () {
+                        vm.about();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Makan Apa Hari Ini?',
+                      style: TextStyle(
+                        color: colorStyle.secondary,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // search bar
+                    InkWell(
+                      onTap: () {
+                        vm.search();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                            hintText: 'Cari Makanan',
+                            hintStyle: TextStyle(
+                              color: colorStyle.textLight,
+                              fontSize: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(
+                                color: colorStyle.secondary,
+                                width: 1,
+                              ),
+                            ),
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: colorStyle.secondary,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    // Category scroll view horizontal
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Kategori',
                             style: TextStyle(
                               color: colorStyle.secondary,
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          onPressed: () {
-                            vm.listDishByCategories(vm.categories[0]);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-
-                  // list makanan
-                  Container(
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: vm.makanan.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.8,
+                        ],
                       ),
-                      itemBuilder: (context, index) {
-                        return DishCard(
-                          dish: vm.makanan[index],
-                          onLike: () {
-                            vm.like(vm.makanan[index]);
-                          },
-                          onTap: () {
-                            vm.detailDish(vm.makanan[index]);
-                          },
-                        );
-                      },
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 100,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: vm.categories.length,
+                        itemBuilder: (context, index) {
+                          return CategoriesCard(
+                            categories: vm.categories[index],
+                            onTap: () {
+                              vm.listDishByCategories(vm.categories[index]);
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    // list makanan
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Makanan',
+                            style: TextStyle(
+                              color: colorStyle.secondary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          TextButton(
+                            child: Text(
+                              'Lihat Semua',
+                              style: TextStyle(
+                                color: colorStyle.secondary,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            onPressed: () {
+                              vm.listDishByCategories(vm.categories[0]);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    // list makanan
+                    Container(
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: vm.makanan.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.8,
+                        ),
+                        itemBuilder: (context, index) {
+                          return DishCard(
+                            dish: vm.makanan[index],
+                            onLike: () {
+                              vm.like(vm.makanan[index]);
+                            },
+                            onTap: () {
+                              vm.detailDish(vm.makanan[index]);
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -280,237 +286,241 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   // web layout
   Widget _buildWebLayout(DashboardViewModel vm) {
-    return SingleChildScrollView(
-      child: RefreshIndicator(
-        onRefresh: vm.refresh,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 75,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.sort,
-                      color: colorStyle.secondary,
-                      size: 20,
-                    ),
-                    onPressed: () {
-                      vm.search();
-                    },
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 45),
-                      child: InkWell(
-                        onTap: () {
+    return RefreshIndicator(
+        onRefresh: () async {
+          await vm.refresh();
+        },
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.only(top: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  height: 75,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(
+                          Icons.sort,
+                          color: colorStyle.secondary,
+                          size: 20,
+                        ),
+                        onPressed: () {
                           vm.search();
                         },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Deliver To Icon arrow down
-                            Row(
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 45),
+                          child: InkWell(
+                            onTap: () {
+                              vm.search();
+                            },
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Antar ke',
-                                  style: TextStyle(
-                                    color: colorStyle.secondary,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                // Deliver To Icon arrow down
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Antar ke',
+                                      style: TextStyle(
+                                        color: colorStyle.secondary,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.keyboard_arrow_down,
+                                      color: colorStyle.secondary,
+                                      size: 20,
+                                    ),
+                                  ],
                                 ),
-                                Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: colorStyle.secondary,
-                                  size: 20,
+                                Text(
+                                  'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: colorStyle.textLight,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ],
                             ),
-                            Text(
-                              'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.person,
+                          color: colorStyle.secondary,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          vm.about();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Makan Apa Hari Ini?',
+                        style: TextStyle(
+                          color: colorStyle.secondary,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      // search bar
+                      InkWell(
+                        onTap: () {
+                          vm.search();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: TextField(
+                            enabled: false,
+                            decoration: InputDecoration(
+                              hintText: 'Cari Makanan',
+                              hintStyle: TextStyle(
                                 color: colorStyle.textLight,
                                 fontSize: 14,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(
+                                  color: colorStyle.secondary,
+                                  width: 1,
+                                ),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: colorStyle.secondary,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      // Category scroll view horizontal
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Kategori',
+                              style: TextStyle(
+                                color: colorStyle.secondary,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.person,
-                      color: colorStyle.secondary,
-                      size: 20,
-                    ),
-                    onPressed: () {
-                      vm.about();
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Makan Apa Hari Ini?',
-                    style: TextStyle(
-                      color: colorStyle.secondary,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  // search bar
-                  InkWell(
-                    onTap: () {
-                      vm.search();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: TextField(
-                        enabled: false,
-                        decoration: InputDecoration(
-                          hintText: 'Cari Makanan',
-                          hintStyle: TextStyle(
-                            color: colorStyle.textLight,
-                            fontSize: 14,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
-                              color: colorStyle.secondary,
-                              width: 1,
-                            ),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: colorStyle.secondary,
-                            size: 20,
-                          ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        height: 100,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: vm.categories.length,
+                          itemBuilder: (context, index) {
+                            return CategoriesCard(
+                              categories: vm.categories[index],
+                              onTap: () {
+                                vm.listDishByCategories(vm.categories[index]);
+                              },
+                            );
+                          },
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  // Category scroll view horizontal
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Kategori',
-                          style: TextStyle(
-                            color: colorStyle.secondary,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 100,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: vm.categories.length,
-                      itemBuilder: (context, index) {
-                        return CategoriesCard(
-                          categories: vm.categories[index],
-                          onTap: () {
-                            vm.listDishByCategories(vm.categories[index]);
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  // list makanan
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Makanan',
-                          style: TextStyle(
-                            color: colorStyle.secondary,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        TextButton(
-                          child: Text(
-                            'Lihat Semua',
-                            style: TextStyle(
-                              color: colorStyle.secondary,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          onPressed: () {
-                            vm.listDishByCategories(vm.categories[0]);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-
-                  // list makanan
-                  Container(
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: vm.makanan.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        childAspectRatio: 1 / 1.5,
+                      SizedBox(
+                        height: 20,
                       ),
-                      itemBuilder: (context, index) {
-                        return DishCard(
-                          dish: vm.makanan[index],
-                          onLike: () {
-                            vm.like(vm.makanan[index]);
+
+                      // list makanan
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Makanan',
+                              style: TextStyle(
+                                color: colorStyle.secondary,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            TextButton(
+                              child: Text(
+                                'Lihat Semua',
+                                style: TextStyle(
+                                  color: colorStyle.secondary,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              onPressed: () {
+                                vm.listDishByCategories(vm.categories[0]);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+
+                      // list makanan
+                      Container(
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: vm.makanan.length,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4,
+                            childAspectRatio: 1 / 1.5,
+                          ),
+                          itemBuilder: (context, index) {
+                            return DishCard(
+                              dish: vm.makanan[index],
+                              onLike: () {
+                                vm.like(vm.makanan[index]);
+                              },
+                              onTap: () {
+                                vm.detailDish(vm.makanan[index]);
+                              },
+                            );
                           },
-                          onTap: () {
-                            vm.detailDish(vm.makanan[index]);
-                          },
-                        );
-                      },
-                    ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
 
@@ -568,6 +578,9 @@ class DashboardViewModel extends ViewModel with BaseViewModel {
 
   Future<void> refresh() async {
     init();
+
+    // delay for refresh
+    await Future.delayed(Duration(seconds: 1));
     notifyListeners();
   }
 

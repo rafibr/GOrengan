@@ -64,10 +64,12 @@ class _AboutScreenState extends State<AboutScreen> {
                       FaIcon(FontAwesomeIcons.user, color: Colors.black, size: 20),
                       SizedBox(width: 10),
                       // name
-                      Text('Muhammad Rafi Brilliansyah Ramadhan',
-                          style: TextStyle(
-                            fontSize: 20,
-                          )),
+                      Flexible(
+                        child: Text('Muhammad Rafi Brilliansyah Ramadhan',
+                            style: TextStyle(
+                              fontSize: 16,
+                            )),
+                      )
                     ],
                   ),
                 ),
@@ -80,10 +82,12 @@ class _AboutScreenState extends State<AboutScreen> {
                       FaIcon(FontAwesomeIcons.envelope, color: Colors.black, size: 20),
                       SizedBox(width: 10),
                       // email
-                      Text('rafi.brilliansyah@gmail.com',
-                          style: TextStyle(
-                            fontSize: 20,
-                          )),
+                      Flexible(
+                        child: Text('rafi.brilliansyah@gmail.com',
+                            style: TextStyle(
+                              fontSize: 16,
+                            )),
+                      )
                     ],
                   ),
                 ),
@@ -96,10 +100,12 @@ class _AboutScreenState extends State<AboutScreen> {
                       FaIcon(FontAwesomeIcons.github, color: Colors.black, size: 20),
                       SizedBox(width: 10),
                       // github
-                      Text('rafibr',
-                          style: TextStyle(
-                            fontSize: 20,
-                          )),
+                      Flexible(
+                        child: Text('rafibr',
+                            style: TextStyle(
+                              fontSize: 16,
+                            )),
+                      )
                     ],
                   ),
                 ),

@@ -57,6 +57,7 @@ class _listDishScreenState extends State<listDishScreen> {
                         hintText: 'Search',
                         icon: Icon(Icons.search),
                       ),
+                      autofocus: true,
                       onChanged: (value) => vm.searchDish(value),
                     ),
                   ),
